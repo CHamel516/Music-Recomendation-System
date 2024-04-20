@@ -38,14 +38,13 @@ latent_dim = 32
 
 # user_ids = 2, 4, 1, 0
 # one_hot_encoding = [0, 0, 1, 0, 0], [0, 0, 0, 0, 1], [0, 1, 0, 0, 0], [1, 0, 0, 0, 0]
-# sparse array representation: 1 at index 2, 1 at index 4, 1 at index 1, 1 at index 
 
-user_input = Input(shape=(num_users,), dtype='int32', name='user_input')
-user_embedding = Embedding(input_dim=num_users, output_dim=latent_dim, name='user_embedding')(user_input)
+user_input = Input(shape=(1,), dtype='int32', name='user_input')
+user_embedding = Embedding(input_dim=1, output_dim=latent_dim, name='user_embedding')(user_input)
 user_vec = Flatten(name='FlattenUsers')(user_embedding)
 
-item_input = Input(shape=(num_items,), dtype='int32', name='item_input')
-item_embedding = Embedding(input_dim=num_items, output_dim=latent_dim, name='item_embedding')(item_input)
+item_input = Input(shape=(1,), dtype='int32', name='item_input')
+item_embedding = Embedding(input_dim=1, output_dim=latent_dim, name='item_embedding')(item_input)
 item_vec = Flatten(name='FlattenItems')(item_embedding)
 
 concat_vec = Concatenate()([user_vec, item_vec])
